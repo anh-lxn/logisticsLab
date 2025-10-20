@@ -1,2 +1,2 @@
 # logisticsLab
-<img src="./docd/shrek.gif"/>
+![shrek](docs/shrek.gif)
