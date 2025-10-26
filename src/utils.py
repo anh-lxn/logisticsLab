@@ -29,24 +29,37 @@ def get_transport_demands():
   _, transport_demand = read_txt_files()
   return transport_demand
 
-transport_demand = get_transport_demands()
+def create_dict_of_transport_demands():
+  num_machines = transport_demand["start"].nunique()
+  dict_transport_demands = {}
+  for i in range(num_machines):
+    df = transport_demand[transport_demand["start"] == i + 1]
+    summe = df["number"].sum()
+    dict_transport_demands[i + 1] = summe
+  return dict_transport_demands
 
+transport_demand = get_transport_demands()
+transport_demands_dict = create_dict_of_transport_demands()
 
 def decrease_transport_demand(start_machine, dest_machine, amount=1):
-  #transport_demand = get_transport_demands()
   condition = (transport_demand["start"] == start_machine) & (transport_demand["dest"] == dest_machine) # Zeile bei der es True ist
   transport_demand.loc[condition, "number"] -= amount
 
-def check_if_transport_possible(start_machine, dest_machine):
-  # check ob summe der numbers bei einer location z.b. 6 noch > 1, wenn ja dann kann er weitermachen, wenn =1 dann muss er die nächste Maschine nehmen
+def check_left_transport_demands(location):
+  global transport_demands_dict
+  if transport_demands_dict[location] > 0:
+    return True
+  else:
+    return False
 
-  #transport_demand = get_transport_demands()
+def check_if_transport_possible(start_machine, dest_machine):
   condition = (transport_demand["start"] == start_machine) & (transport_demand["dest"] == dest_machine)
   demand_row = transport_demand.loc[condition]
   if not demand_row.empty and demand_row.iloc[0]["number"] > 0:
     return True
   else:
     return False
+
 
 def calculate_total_transport_demands():
   #transport_demand = get_transport_demands()
@@ -102,7 +115,7 @@ def calculate_best_route(carID, start_machine, unload, load):
     distances = {}
     for i in range(num_demands):
       dest_machine = routes_for_start_machine.iloc[i]["dest"]
-      if calculate_distances(start_machine, dest_machine) != 0 and check_if_transport_possible(start_machine, dest_machine): # falls start = 1 und dest = 1, was aber keinen Sinn ergibt, aber trotzdem Fehler auffangen
+      if calculate_distances(start_machine, dest_machine) != 0 and check_if_transport_possible(start_machine, dest_machine) and check_left_transport_demands(dest_machine): # falls start = 1 und dest = 1, was aber keinen Sinn ergibt, aber trotzdem Fehler auffangen
         distances[dest_machine] = calculate_distances(start_machine, dest_machine)
     try:
       #least_distance = min(distances.values())
