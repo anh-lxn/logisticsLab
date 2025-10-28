@@ -2,6 +2,12 @@ __author__ = "Karl-Benedikt Reith, Sebastian Rank"
 
 import glob
 import copy
+import os
+
+# relative Pfade
+script_dir = os.path.dirname(os.path.abspath(__file__))
+git_dir = os.path.dirname(script_dir)
+data_dir = os.path.join(git_dir, 'data')
 
 
 def validations(demand_file_name, schedule_file_names, machine_positions_file_name, velocity):
@@ -180,7 +186,7 @@ def validations(demand_file_name, schedule_file_names, machine_positions_file_na
         for start, rest in demand_copy.items():
             for dest, number in rest.items():
                 if number > 0:
-                    print('Invalid solution: not all transports from {} to {} done'.format(start, dest))
+                    #print('Invalid solution: not all transports from {} to {} done'.format(start, dest))
                     valid = False
                 elif number < 0:
                     print('Invalid solution: too many transports from {} to {} done'.format(start, dest))
