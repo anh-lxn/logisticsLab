@@ -3,8 +3,6 @@ class Car:
     self.id = car_id
     self.old_position = position
     self.position = position
-    self.current_time = 0 # Current time for the car to get to the next machine
-    self.active = False
     self.leerfahrt = False
     self.completed_jobs = 0
 

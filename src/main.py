@@ -1,7 +1,7 @@
 from network import Network
 from simulation import Simulation
 from car import Car
-from utils import *
+from utils import read_txt_files
 
 machine_positions, transport_demand = read_txt_files()
 
