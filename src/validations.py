@@ -3,6 +3,7 @@ __author__ = "Karl-Benedikt Reith, Sebastian Rank"
 import glob
 import copy
 import os
+import pandas as pd
 
 # relative Pfade
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -78,6 +79,9 @@ def validations(demand_file_name, schedule_file_names, machine_positions_file_na
                 lines = schedule_file.readlines()
         except FileNotFoundError:
             print('Error: could not open schedule file: {}'.format(schedule_file_name))
+
+        emptyRun = lines[1].replace(",", ";").split(";")[4].replace('"', '').strip()
+        lines = [";".join(line.strip().replace(",", ";").split(";")[:4]) + "\n" for line in lines]
 
         # remove header if exists
         try:
@@ -235,18 +239,29 @@ def validations(demand_file_name, schedule_file_names, machine_positions_file_na
             score = max(vehicle_times)
             print('Valid solution; Score for', schedule_file_name + ':', format(round(score, 4)), sep=' ')
         # ############## score for valid solution ############################>
-    return True
+    return score, emptyRun
 
 
 def get_schedule_files():
-    files = glob.glob('*schedule*')
+    schedules_path = os.path.join("**", "*schedule*")
+    files = glob.glob(schedules_path, recursive=True)
+    print(files)
     return files
 
+def validate_all_schedules(demand_file, schedule_files, machine_positions_file, velocity):
+    results = []
+    for file in schedule_files:
+        print(f"\n--- Prüfe: {file} ---")
+        score, emptyRun = validations(demand_file, [file], machine_positions_file, velocity)
+        result = { "file": file, "score": score, "emptyRuns":  emptyRun }
+        results.append(result)
+    return pd.DataFrame(results)
 
 if __name__ == "__main__":
     try:
         schedule_files = get_schedule_files()
-        validations('transport_demand.txt', schedule_files, 'machine_positions.txt', 1)
+        df = validate_all_schedules('transport_demand.txt', schedule_files, 'machine_positions.txt', 1)
+        df.to_csv('validation_results.csv', index=False)
     except SystemExit:
         pass
     except Exception as e:

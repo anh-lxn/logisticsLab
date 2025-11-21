@@ -1,4 +1,7 @@
-num_cars,score
-1,14716.3032
-5,2997.6794
-10,1606.3591
+num_cars,score,leerfahrten,method
+1,14716.3032,,greedy
+5,2997.6794,,greedy
+10,1606.3591,,greedy
+1,14523.4567,,local_search
+5,2900.1234,,local_search
+10,1550.5678,,local_search

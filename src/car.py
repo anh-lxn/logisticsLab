@@ -5,6 +5,4 @@ class Car:
     self.position = position
     self.leerfahrt = False
     self.completed_jobs = 0
-
-    self.unload = 0
-    self.load = 1
+    self.empty_runs = 0
