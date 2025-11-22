@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # relative Pfade
-git_dir = os.path.dirname(os.getcwd()) # Use this if using the main.ipynb file
-#git_dir = os.getcwd() # Use this if using utils.py directly
+#git_dir = os.path.dirname(os.getcwd()) # Use this if using the main.ipynb file
+git_dir = os.getcwd() # Use this if using utils.py directly
 data_dir = os.path.join(git_dir, 'data')
 docs_dir = os.path.join(git_dir, 'docs')
 machine_positions_path = os.path.join(data_dir, "machine_positions.txt")
@@ -45,6 +45,34 @@ def read_validation_results(filename):
   car10_results = car10_results[["method", "k", "emptyRuns", "score"]].sort_values(by=["method", "k"])
 
   return car1_results, car5_results, car10_results
+
+def plot_machine_positions(show=False, save=False):
+  machine_positions, _ = read_txt_files()
+  x = machine_positions["x"]
+  y = machine_positions["y"]
+  id = machine_positions["machine_id"]
+
+  x_range = np.arange(0, 70, 5)
+  y_range = np.arange(0, 45, 5)
+
+  fig, ax = plt.subplots(1, 1, figsize=(8,6))
+  ax.scatter(x, y, s=150)
+  for i, id in enumerate(id):
+    ax.annotate(id, (x[i]+0.9, y[i]+0.9), fontsize=9, fontweight='bold')
+
+  ax.set_xticks(x_range)
+  ax.set_yticks(y_range)
+  ax.grid()
+  ax.set_axisbelow(True)
+  ax.set_title("Machine Positions", fontsize=14, fontweight='bold')
+  ax.set_xlabel("X Position", fontsize=12, fontweight='bold')
+  ax.set_ylabel("Y Position", fontsize=12, fontweight='bold')
+
+  if save:
+    plt.savefig(os.path.join(docs_dir, "machine_positions.png"), dpi=300)
+  if show:
+    plt.show()
+
 
 def plot_validation_results(show=False, save=False):
   car1_results, car5_results, car10_results = read_validation_results(val_res_path)
@@ -183,3 +211,5 @@ def plot_best_validation_results(show=False, save=False):
   if show:
     plt.show()
 
+
+plot_machine_positions(show=True, save=True)
