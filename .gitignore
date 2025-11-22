@@ -1,2 +1,10 @@
 venv/
 **/__pycache__/
+
+# Interne Kurs- und Uni-Unterlagen NICHT veröffentlichen
+docs/Aufgabenstellung.pdf
+docs/Aufgabenstellung-1.pdf
+docs/Bauanleitung_Lego.pdf
+docs/Grundlagen_Logistik.pdf
+docs/OrganisationVorstellungAG.pdf
+docs/Programmierung.pdf
