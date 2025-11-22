@@ -245,7 +245,6 @@ def validations(demand_file_name, schedule_file_names, machine_positions_file_na
 def get_schedule_files():
     schedules_path = os.path.join("**", "*schedule*")
     files = glob.glob(schedules_path, recursive=True)
-    print(files)
     return files
 
 def validate_all_schedules(demand_file, schedule_files, machine_positions_file, velocity):
