@@ -41,7 +41,6 @@ Open the `src/main.ipynb` file in the Jupyter Notebook interface.
 
 ---
 ## 3 Methoden zur Lösung des Problems
-Die Aufgabenstellung für die Aufgabe 1 befindet sich hier: [Aufgabenstellung](docs/Aufgabenstellung.pdf).
 
 ### Greedy Heuristic Algorithm
 Die Greedy-Heuristik trifft stets die lokal beste Entscheidung. Für die aktuelle Fahrzeugposition wird der näheste Auftrag, also der Transport mit der kürzesten Distanz, ausgewählt.
