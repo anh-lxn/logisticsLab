@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # relative Pfade
-#git_dir = os.path.dirname(os.getcwd()) # Use this if using the main.ipynb file
-git_dir = os.getcwd() # Use this if using utils.py directly
+git_dir = os.path.dirname(os.getcwd()) # Use this if using the main.ipynb file
+#git_dir = os.getcwd() # Use this if using utils.py directly
 data_dir = os.path.join(git_dir, 'data')
 docs_dir = os.path.join(git_dir, 'docs')
 machine_positions_path = os.path.join(data_dir, "machine_positions.txt")
@@ -211,5 +211,3 @@ def plot_best_validation_results(show=False, save=False):
   if show:
     plt.show()
 
-
-plot_machine_positions(show=True, save=True)
