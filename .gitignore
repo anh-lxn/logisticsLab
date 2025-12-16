@@ -1,5 +1,6 @@
 venv/
 **/__pycache__/
+~$**.pptx
 
 # Interne Kurs- und Uni-Unterlagen NICHT veröffentlichen
 docs/Aufgabenstellung.pdf
