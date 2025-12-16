@@ -211,3 +211,29 @@ def plot_best_validation_results(show=False, save=False):
   if show:
     plt.show()
 
+def plot_dataframes_as_imgs(dataframe, output_path, title, save=False):
+  fig, ax = plt.subplots(figsize=(8, 4))
+  fig.patch.set_facecolor("#1e1e1e")
+  ax.set_facecolor("#1e1e1e")
+  ax.axis('off')
+  ax.set_title(title, fontsize=16, fontweight='bold', color='white', pad=20)
+
+  table = ax. table(cellText=dataframe.values, colLabels=dataframe.columns, cellLoc='center', loc='center')
+  table.auto_set_font_size(False)
+  table.set_fontsize(15) 
+  table.scale(1, 1.8)
+
+  # Farben anpassen
+  for (row, col), cell in table.get_celld().items():
+    cell.set_edgecolor("#2a2a2a")
+    if row == 0:  # Header
+      cell.set_facecolor("#2d2d2d")
+      cell.get_text().set_color("white")
+      cell.get_text().set_weight("bold")
+    else:
+      # leicht alternierende Zeilen
+      cell.set_facecolor("#1e1e1e" if row % 2 == 0 else "#252526")
+      cell.get_text().set_color("#d4d4d4")
+
+  if save:
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
