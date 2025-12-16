@@ -138,6 +138,23 @@ Für 5 Fahrzeuge hingegen liefert die Greedy Heuristic (GH) die Validationsscore
 
 ![best_validation_result](docs/best_validation_results.png)
 
+## Citation
+
+> **Harahap, R. F., & Sawaluddin**,
+> *"Study vehicle routing problem using Nearest Neighbor Algorithm"*,
+> Journal of Physics: Conference Series, doi: 10.1088/1742-6596/2421/1/012027, 2023,
+> [[Paper]](https://www.researchgate.net/publication/367415289_Study_vehicle_routing_problem_using_Nearest_Neighbor_Algorithm).
+
+> **Lague, S. (2021):**,
+> *"Coding Adventure: Ant and Slime Simulations"*,
+> [[Github]](https://github.com/SebLague/Ant-Simulation),
+> [[Youtube]](https://www.youtube.com/@SebastianLague).
+
+> **Weiner, A. (2021)**,
+> *ML-CFD Lecture – Surrogate Modeling for Discrete and Continuous Predictions (Lectures 4&5)*,
+> [[Github]](https://github.com/AndreWeiner/ml-cfd-lecture).
+
+
 ## Authors
 - [@Anh Le Xuan](https://anhlexuan.com)
 - [@Herik Max Stein]
