@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# relative Pfade
+# relative Paths
 git_dir = os.path.dirname(os.getcwd()) # Use this if using the main.ipynb file
 #git_dir = os.getcwd() # Use this if using utils.py directly
 data_dir = os.path.join(git_dir, 'data')

@@ -12,9 +12,9 @@ class Network:
 
   # Distances
   def calculate_distance_matrix(self, display_distance_matrix=False):
-    cross = self.machine_positions.merge(self.machine_positions, how="cross", suffixes=("_i", "_j")) # Kreuzprodukt der Maschinenpositionen
-    cross["dist"] = np.sqrt((cross["x_i"] - cross["x_j"])**2 + (cross["y_i"] - cross["y_j"])**2) # euklidische Distanz
-    self.dist_matrix = cross.pivot(index="machine_id_i", columns="machine_id_j", values="dist") # Umwandlung in Matrixform
+    cross = self.machine_positions.merge(self.machine_positions, how="cross", suffixes=("_i", "_j")) # Crossproduct of Machine Positions
+    cross["dist"] = np.sqrt((cross["x_i"] - cross["x_j"])**2 + (cross["y_i"] - cross["y_j"])**2) # Euclidean Distance
+    self.dist_matrix = cross.pivot(index="machine_id_i", columns="machine_id_j", values="dist") # Conversion to matrix form
     if display_distance_matrix:
       display(self.dist_matrix.round(2))
     return self.dist_matrix.round(2)
@@ -34,7 +34,7 @@ class Network:
 
   # Helpers
   def decrease_transport_demand(self, start_machine, dest_machine, amount=1):
-    condition = (self.transport_demand["start"] == start_machine) & (self.transport_demand["dest"] == dest_machine) # Zeile bei der es True ist
+    condition = (self.transport_demand["start"] == start_machine) & (self.transport_demand["dest"] == dest_machine)
     self.transport_demand.loc[condition, "number"] -= amount
     self._update_transport_demand()
 
