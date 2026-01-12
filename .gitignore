@@ -9,3 +9,21 @@ docs/Bauanleitung_Lego.pdf
 docs/Grundlagen_Logistik.pdf
 docs/OrganisationVorstellungAG.pdf
 docs/Programmierung.pdf
+
+
+# Latex temporäre Dateien
+*.aux
+*.lof
+*.log 
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.bbl
+*.blg
+*.fdb_latexmk
+*.synctex.gz
+

@@ -89,6 +89,8 @@ def plot_validation_results(show=False, save=False):
   axs[0].bar(x_positions - width/2, scores, color='skyblue', width=width)
   for i, score in zip(x_positions, scores):
     axs[0].text(x=i-width/2, y=scores.min()-1000, s=f"{score:.2f}", ha='center', va='bottom', rotation=90, fontsize=10, fontweight='bold')
+  axs[0].axhline(y=14781, color='gold', linestyle='-', label='Course Score', linewidth=3)
+  axs[0].legend(loc='upper right')
 
   ## empty runs plot
   axs_empty_runs = axs[0].twinx()
@@ -114,6 +116,8 @@ def plot_validation_results(show=False, save=False):
   axs[1].bar(x_positions - width/2, scores, color='skyblue', width=width)
   for i, score in zip(x_positions, scores):
     axs[1].text(x=i-width/2, y=scores.min()-200, s=f"{score:.2f}", ha='center', va='bottom', rotation=90, fontsize=10, fontweight='bold')
+  axs[1].axhline(y=3093, color='gold', linestyle='-', label='Course Score', linewidth=3)
+  axs[1].legend(loc='upper right')
 
   ## empty runs plot
   axs_empty_runs = axs[1].twinx()
@@ -138,6 +142,8 @@ def plot_validation_results(show=False, save=False):
   axs[2].bar(x_positions - width/2, scores, color='skyblue', width=width)
   for i, score in zip(x_positions, scores):
     axs[2].text(x=i-width/2, y=scores.min()-100, s=f"{score:.2f}", ha='center', va='bottom', rotation=90, fontsize=10, fontweight='bold')
+  axs[2].axhline(y=1700, color='gold', linestyle='-', label='Course Score', linewidth=3)
+  axs[2].legend(loc='upper right')
 
   ## empty runs plot
   axs_empty_runs = axs[2].twinx()
@@ -173,31 +179,36 @@ def plot_best_validation_results(show=False, save=False):
 
   labels = ['1 Car', '5 Cars', '10 Cars']
   best_scores = [best_car1['score'], best_car5['score'], best_car10['score']]
+  course_scores = [14781, 3093, 1700]
   best_empty_runs = [best_car1['emptyRuns'], best_car5['emptyRuns'], best_car10['emptyRuns']]
   methods = [best_car1['method'] + f"_k{best_car1['k']}" + f" / {labels[0]}",
              best_car5['method'] + f"_k{best_car5['k']}" + f" / {labels[1]}",
              best_car10['method'] + f"_k{best_car10['k']}" + f" / {labels[2]}"]
   x_positions = np.arange(len(labels))
-  width = 0.4
+  width = 0.3
 
 
   fig, ax = plt.subplots(1, 1, figsize=(8, 8))
 
   ## score plot
-  ax.bar(x_positions - width/2, best_scores, width=width, color='skyblue', label='Best Score')
+  ax.bar(x_positions - width, best_scores, width=width, color='skyblue', label='Best Score')
   for i, score in zip(x_positions, best_scores):
-    ax.text(x=i-width/2, y=score/2, s=f"{score:.2f}", ha='center', va='center', rotation=90, fontsize=10, fontweight='bold')
+    ax.text(x=i-width, y=score-score/2, s=f"{score:.2f}", ha='center', va='center', rotation=90, fontsize=10, fontweight='bold')
+
+  ax.bar(x_positions, course_scores, width=width, color='gold', label='Course Score')
+  for i, score in zip(x_positions, course_scores):
+    ax.text(x=i, y=score-score/2, s=f"{score:.2f}", ha='center', va='center', rotation=90, fontsize=10, fontweight='bold')
 
   ## empty runs plot
   ax_empty_runs = ax.twinx()
-  ax_empty_runs.bar(x_positions + width/2, best_empty_runs, width=width, color='lightcoral', label='Empty Runs')
+  ax_empty_runs.bar(x_positions + width, best_empty_runs, width=width, color='lightcoral', label='Empty Runs')
   for i, empty_run in zip(x_positions, best_empty_runs):
-    ax_empty_runs.text(x=i+width/2, y=empty_run/2, s=f"{empty_run}", ha='center', va='center', rotation=90, fontsize=10, fontweight='bold')
+    ax_empty_runs.text(x=i+width, y=empty_run-empty_run/2, s=f"{empty_run}", ha='center', va='center', rotation=90, fontsize=10, fontweight='bold')
 
   ## plot settings
   ax_empty_runs.set_ylabel("Empty Runs", color='lightcoral', fontweight='bold')
   ax.set_title("Best Score per Scenario", fontsize=14, fontweight='bold')
-  ax.set_ylabel("Best Score", color='skyblue', fontweight='bold')
+  ax.set_ylabel("Score", color='black', fontweight='bold')
   ax.grid(axis='y', linestyle='--', alpha=0.5)
   ax.set_axisbelow(True)
   ax.set_ylim(0, max(best_scores) * 1.1)
